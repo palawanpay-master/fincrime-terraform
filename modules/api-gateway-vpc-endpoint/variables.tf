@@ -7,21 +7,13 @@ variable "common" {
     environment  = string
     region       = string
   })
-
 }
 
 variable "params" {
   type = object({
-    mongodb_uri       = string
-    redshift_hostName = string
-    redshift_database = string
-    redshift_secrets = object(
-      {
-        username = string
-        password = string
-      }
-    )
-    security_group_ids = list(string)
+    vpc_id             = string
     subnet_ids         = list(string)
+    security_group_ids = list(string)
   })
 }
+

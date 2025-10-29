@@ -9,6 +9,14 @@ variable "common" {
   })
 }
 
+variable "params" {
+  type = object({
+    vpc_id             = string
+    subnet_ids         = list(string)
+    security_group_ids = list(string)
+  })
+}
+
 # This VPC module provisions the following
 # - VPC
 # - Number of AZ is dependent on the provided number of subnets

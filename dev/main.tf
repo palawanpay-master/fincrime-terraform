@@ -37,31 +37,7 @@ provider "aws" {
   profile                  = var.aws_profile
 }
 
-# Shared Parameters
 
-
-
-
-# Github Runner
-# module "ec2-github-runner" {
-#   source = "../modules/ec2-github-runner"
-#   common = local.common
-#   github_runner_config = {
-#     ami           = "ami-0cf70e1d861e1dfb8"
-#     instance_type = "t2.medium"
-#     vpc_id        = module.vpc.vpc_id
-#     subnet_id     = module.vpc.private_subnet_ids[0]
-#     user_data     = <<-EOF
-#                         #!/bin/bash
-#                         sudo yum install -y perl-Digest-SHA
-#                         sudo yum install -y libicu
-#                       EOF
-#   }
-# }
-
-# We primarily deploy lambda resources via Serverless Framework
-# Additional configurations from lambda that is out-of-scope of Serverless Framework
-# Should be provisioned here
 module "lambda-config" {
   source = "../modules/lambda-config"
   common = local.common
@@ -70,30 +46,32 @@ module "lambda-config" {
   }
 }
 
+
+module "api-gateway-vpc-endpoint" {
+  source = "../modules/api-gateway-vpc-endpoint"
+  common = local.common
+  params = {
+    vpc_id             = var.vpc_id
+    subnet_ids         = var.private_subnet_ids
+    security_group_ids = var.security_group_ids
+  }
+}
+
+
 # Centralized bucket for storing all necesarry objects
 module "s3-private-storage" {
   source               = "../modules/s3-private-storage"
   create_ssm_parameter = true
-  bucket_name          = "storage2"
+  bucket_name          = "storage"
   common               = local.common
 }
 
 module "s3-serverless-artifacts" {
   source               = "../modules/s3-private-storage"
   create_ssm_parameter = false
-  bucket_name          = "serverless-artifacts2"
+  needs_versioning     = true
+  bucket_name          = "serverless-artifacts"
   common               = local.common
-}
-
-module "external-ssm-paramters" {
-  source = "../modules/external-ssm-parameters"
-  common = local.common
-  params = {
-    redshift_hostName = var.redshift_hostName
-    redshift_database = var.redshift_database
-    redshift_secrets  = var.redshift_secrets
-    mongodb_secrets   = var.mongodb_secrets
-  }
 }
 
 # Cognito for authentication
@@ -101,4 +79,18 @@ module "cognito-user-pool" {
   source = "../modules/cognito-admin"
   common = local.common
 }
+
+module "external-ssm-parameters" {
+  source = "../modules/external-ssm-parameters"
+  common = local.common
+  params = {
+    redshift_hostName  = var.redshift_hostName
+    redshift_database  = var.redshift_database
+    redshift_secrets   = var.redshift_secrets
+    mongodb_uri        = var.mongodb_uri
+    security_group_ids = var.security_group_ids
+    subnet_ids         = var.private_subnet_ids
+  }
+}
+
 

@@ -21,3 +21,12 @@ resource "aws_s3_bucket_cors_configuration" "private_bucket_cors" {
     max_age_seconds = 3000
   }
 }
+
+resource "aws_s3_bucket_versioning" "private_bucket_versioning" {
+  count  = var.needs_versioning ? 1 : 0
+  bucket = aws_s3_bucket.private_bucket.id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
+}

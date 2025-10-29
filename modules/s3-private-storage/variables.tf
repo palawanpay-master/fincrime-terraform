@@ -18,3 +18,9 @@ variable "create_ssm_parameter" {
   type        = bool
   description = "Whether to create the SSM parameter for the private S3 bucket"
 }
+
+variable "needs_versioning" {
+  type        = bool
+  description = "Whether to enable versioning on the S3 bucket"
+  default     = false
+}

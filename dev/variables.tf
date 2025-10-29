@@ -9,12 +9,19 @@ variable "vpc_id" {
   type = string
 }
 
-variable "mongodb_secrets" {
-  description = "MongoDB Secrets"
-  type = object({
-    username = string
-    password = string
-  })
+variable "security_group_ids" {
+  description = "List of security group IDs"
+  type        = list(string)
+}
+
+variable "private_subnet_ids" {
+  description = "List of private subnet IDs"
+  type        = list(string)
+}
+
+variable "mongodb_uri" {
+  description = "MongoDB URI"
+  type        = string
 }
 
 variable "redshift_hostName" {

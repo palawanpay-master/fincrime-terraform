@@ -62,7 +62,7 @@ module "api-gateway-vpc-endpoint" {
 module "s3-private-storage" {
   source               = "../modules/s3-private-storage"
   create_ssm_parameter = true
-  bucket_name          = "storage"
+  bucket_name          = "private-storage"
   common               = local.common
 }
 
@@ -74,10 +74,22 @@ module "s3-serverless-artifacts" {
   common               = local.common
 }
 
+module "s3-policy-bucket" {
+  source               = "../modules/s3-private-storage"
+  create_ssm_parameter = true
+  bucket_name          = "policy-bucket"
+  common               = local.common
+}
+
+
 # Cognito for authentication
 module "cognito-user-pool" {
-  source = "../modules/cognito-admin"
-  common = local.common
+  source                      = "../modules/cognito-admin"
+  common                      = local.common
+  microsoft_saml_metadata_url = var.microsoft_saml_metadata_url
+  cognito_domain_prefix       = var.cognito_domain_prefix
+  cognito_callback_urls       = var.cognito_callback_urls
+  cognito_logout_urls         = var.cognito_logout_urls
 }
 
 module "external-ssm-parameters" {
@@ -91,6 +103,17 @@ module "external-ssm-parameters" {
     security_group_ids = var.security_group_ids
     subnet_ids         = var.private_subnet_ids
   }
+}
+
+# locals {
+#   cedarpy_layer_source_abs = "${path.root}/cedarpy-layer.zip"
+# }
+module "lambda-layer" {
+  source               = "../modules/lambda-layer"
+  common               = local.common
+  artifacts_bucket     = module.s3-private-storage.bucket_name
+  cedarpy_layer_key    = var.cedarpy_layer_key
+  cedarpy_layer_source = var.cedarpy_layer_source
 }
 
 

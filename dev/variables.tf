@@ -19,6 +19,28 @@ variable "private_subnet_ids" {
   type        = list(string)
 }
 
+variable "cognito_domain_prefix" {
+  description = "Unique domain prefix for Cognito Hosted UI"
+  type        = string
+}
+
+variable "cognito_callback_urls" {
+  description = "Allowed redirect URIs after login"
+  type        = list(string)
+  default     = ["https://app.example.com/callback", "http://localhost:3000/dashboard"]
+}
+
+variable "cognito_logout_urls" {
+  description = "Allowed redirect URIs after logout"
+  type        = list(string)
+  default     = ["https://app.example.com/", "http://localhost:3000/auth/login"]
+}
+
+variable "microsoft_saml_metadata_url" {
+  description = "Microsoft Entra ID SAML metadata URL (Federation Metadata)"
+  type        = string
+}
+
 variable "mongodb_uri" {
   description = "MongoDB URI"
   type        = string
@@ -38,7 +60,16 @@ variable "redshift_secrets" {
     password = string
   })
 }
+variable "cedarpy_layer_key" {
+  description = "S3 key/path for the cedarpy layer zip"
+  type        = string
+  default     = "layers/cedarpy-layer.zip"
+}
 
+variable "cedarpy_layer_source" {
+  description = "Local path to the cedarpy layer zip (built from Docker)"
+  type        = string
+}
 
 # Optional Resources
 # The following values here should be defined on the start of the project,

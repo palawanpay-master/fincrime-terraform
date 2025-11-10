@@ -137,19 +137,22 @@ resource "aws_iam_role_policy" "lambda_policy" {
           "sqs:ListQueues",
           "sqs:CreateQueue",
           "sqs:DeleteQueue",
-          "sqs:SendMessageBatch",
-          "sqs:ReceiveMessageBatch",
-          "sqs:DeleteMessageBatch",
           "sqs:GetQueueUrl",
           "sqs:ListQueueTags",
           "sqs:TagQueue",
           "sqs:UntagQueue",
           "sqs:ChangeMessageVisibility",
-          "sqs:ChangeMessageVisibilityBatch",
           "sqs:ListDeadLetterSourceQueues",
-          "sqs:ListQueueTags",
         ],
         Resource = "*",
+      },
+      {
+        Sid    = "CognitoIdpPolicy",
+        Effect = "Allow",
+        Action = [
+          "cognito-idp:Admin*",
+        ],
+        Resource = "*"
       },
       {
         Sid    = "IAMPolicy",

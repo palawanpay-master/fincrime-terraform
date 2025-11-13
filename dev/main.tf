@@ -105,15 +105,3 @@ module "external-ssm-parameters" {
   }
 }
 
-# locals {
-#   cedarpy_layer_source_abs = "${path.root}/cedarpy-layer.zip"
-# }
-module "lambda-layer" {
-  source               = "../modules/lambda-layer"
-  common               = local.common
-  artifacts_bucket     = module.s3-private-storage.bucket_name
-  cedarpy_layer_key    = var.cedarpy_layer_key
-  cedarpy_layer_source = var.cedarpy_layer_source
-}
-
-

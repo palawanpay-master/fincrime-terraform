@@ -60,16 +60,6 @@ variable "redshift_secrets" {
     password = string
   })
 }
-variable "cedarpy_layer_key" {
-  description = "S3 key/path for the cedarpy layer zip"
-  type        = string
-  default     = "layers/cedarpy-layer.zip"
-}
-
-variable "cedarpy_layer_source" {
-  description = "Local path to the cedarpy layer zip (built from Docker)"
-  type        = string
-}
 
 # Optional Resources
 # The following values here should be defined on the start of the project,

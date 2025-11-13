@@ -78,7 +78,7 @@ resource "aws_cognito_user_pool" "admin" {
     require_numbers                  = true
     require_symbols                  = true
     require_uppercase                = true
-    temporary_password_validity_days = 3
+    temporary_password_validity_days = 1
   }
 
   schema {

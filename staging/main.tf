@@ -12,12 +12,12 @@ terraform {
     # - bucket and dynamodb_table prefix = the name of the project
     # - region = region of the s3 and dynamodb
     # - key = prefix of the environment e.g. (sandbox, dev, staging, uat, beta, prod)
-    bucket = "ppay-fincrime-dev-terraform-state-bucket"
-    key    = "dev/terraform.tfstate"
+    bucket = "ppay-fincrime-uat-terraform-state-bucket"
+    key    = "uat/terraform.tfstate"
     region = "ap-southeast-1"
     # Uncomment this if you are running this locally
     shared_credentials_files = ["~/.aws/credentials"]
-    profile                  = "ppay-fincrime-dev"
+    profile                  = "ppay-fincrime-uat"
   }
 }
 

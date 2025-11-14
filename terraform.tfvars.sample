@@ -4,11 +4,13 @@ the project.
 
 # Required
 project_name                    = "" (Required)
-aws_profile                     = "" (Required)
 state_lock_region               = "" (Required)
+aws_profile                     = "" (Required)
+cognito_domain_prefix           = "" (Required)
 vpc_id                          = "" (Required)
 security_group_ids              = [] (Required)
 private_subnet_ids              = [] (Required)
+microsoft_saml_metadata_url     = "  (Required)
 mongodb_uri                     = "" (Required)
 redshift_hostName               = "" (Required)
 redshift_database               = "" (Required)

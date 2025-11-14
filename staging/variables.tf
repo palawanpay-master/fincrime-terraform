@@ -66,7 +66,7 @@ variable "redshift_secrets" {
 # But can also be substituted via the tfvars file.
 variable "environment" {
   type    = string
-  default = "dev"
+  default = "staging"
 }
 
 variable "region" {

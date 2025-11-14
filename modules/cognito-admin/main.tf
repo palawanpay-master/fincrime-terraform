@@ -1,4 +1,4 @@
-## Make sure User Service is deployed when using this
+# Make sure User Service is deployed when using this
 data "aws_lambda_function" "cognito_custom_message" {
   function_name = "${var.common.project_name}-user-service-${var.common.environment}-CognitoCustomMessage"
 }

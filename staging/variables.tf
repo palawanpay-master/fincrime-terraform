@@ -50,6 +50,10 @@ variable "redshift_hostName" {
   type = string
 }
 
+variable "redshift_tableName" {
+  type = string
+}
+
 variable "redshift_database" {
   type = string
 }

@@ -36,6 +36,19 @@ resource "aws_ssm_parameter" "redshift_hostName" {
     TerraformManaged = true
   }
 }
+
+resource "aws_ssm_parameter" "redshift_tableName" {
+  name        = "/${var.common.project_name}/${var.common.environment}/external/redshift/tableName"
+  description = "Redshift Table Name"
+  type        = "String"
+  value       = var.params.redshift_tableName
+  tags = {
+    Environment      = var.common.environment
+    Project          = var.common.project_name
+    TerraformManaged = true
+  }
+}
+
 resource "aws_ssm_parameter" "redshift_database" {
   name        = "/${var.common.project_name}/${var.common.environment}/external/redshift/database"
   description = "Redshift Database Name"

@@ -58,7 +58,7 @@ module "api-gateway-vpc-endpoint" {
 }
 
 
-# Centralized bucket for storing all necesarry objects
+# Centralized bucket for storing all necessary objects
 module "s3-private-storage" {
   source               = "../modules/s3-private-storage"
   create_ssm_parameter = true
@@ -98,6 +98,7 @@ module "external-ssm-parameters" {
   params = {
     redshift_hostName  = var.redshift_hostName
     redshift_database  = var.redshift_database
+    redshift_tableName = var.redshift_tableName
     redshift_secrets   = var.redshift_secrets
     mongodb_uri        = var.mongodb_uri
     security_group_ids = var.security_group_ids

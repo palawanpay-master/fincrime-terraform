@@ -37,11 +37,23 @@ resource "aws_ssm_parameter" "redshift_hostName" {
   }
 }
 
-resource "aws_ssm_parameter" "redshift_tableName" {
-  name        = "/${var.common.project_name}/${var.common.environment}/external/redshift/tableName"
-  description = "Redshift Table Name"
+resource "aws_ssm_parameter" "redshift_cust_tableName" {
+  name        = "/${var.common.project_name}/${var.common.environment}/external/redshift/customer/tableName"
+  description = "Redshift Customer Table Name"
   type        = "String"
-  value       = var.params.redshift_tableName
+  value       = var.params.redshift_cust_tableName
+  tags = {
+    Environment      = var.common.environment
+    Project          = var.common.project_name
+    TerraformManaged = true
+  }
+}
+
+resource "aws_ssm_parameter" "redshift_merc_tableName" {
+  name        = "/${var.common.project_name}/${var.common.environment}/external/redshift/merchant/tableName"
+  description = "Redshift Merchant Table Name"
+  type        = "String"
+  value       = var.params.redshift_merc_tableName
   tags = {
     Environment      = var.common.environment
     Project          = var.common.project_name

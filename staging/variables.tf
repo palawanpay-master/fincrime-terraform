@@ -50,7 +50,11 @@ variable "redshift_hostName" {
   type = string
 }
 
-variable "redshift_tableName" {
+variable "redshift_cust_tableName" {
+  type = string
+}
+
+variable "redshift_merc_tableName" {
   type = string
 }
 

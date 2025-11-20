@@ -12,11 +12,12 @@ variable "common" {
 
 variable "params" {
   type = object({
-    mongodb_uri        = string
-    redshift_hostName  = string
-    redshift_tableName = string
-    redshift_database  = string
-    redshift_secrets   = object(
+    mongodb_uri             = string
+    redshift_hostName       = string
+    redshift_cust_tableName = string
+    redshift_merc_tableName = string
+    redshift_database       = string
+    redshift_secrets = object(
       {
         username = string
         password = string

@@ -96,13 +96,14 @@ module "external-ssm-parameters" {
   source = "../modules/external-ssm-parameters"
   common = local.common
   params = {
-    redshift_hostName  = var.redshift_hostName
-    redshift_database  = var.redshift_database
-    redshift_tableName = var.redshift_tableName
-    redshift_secrets   = var.redshift_secrets
-    mongodb_uri        = var.mongodb_uri
-    security_group_ids = var.security_group_ids
-    subnet_ids         = var.private_subnet_ids
+    redshift_hostName       = var.redshift_hostName
+    redshift_database       = var.redshift_database
+    redshift_cust_tableName = var.redshift_cust_tableName
+    redshift_merc_tableName = var.redshift_merc_tableName
+    redshift_secrets        = var.redshift_secrets
+    mongodb_uri             = var.mongodb_uri
+    security_group_ids      = var.security_group_ids
+    subnet_ids              = var.private_subnet_ids
   }
 }
 

@@ -66,7 +66,8 @@ resource "aws_iam_role_policy" "lambda_policy" {
         Action = [
           "s3:GetObject",
           "s3:PutObject",
-          "s3:ListBucket"
+          "s3:ListBucket",
+          "s3:DeleteObject"
         ],
         Resource = "*"
       },

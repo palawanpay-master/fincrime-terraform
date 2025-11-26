@@ -81,6 +81,10 @@ module "s3-policy-bucket" {
   common               = local.common
 }
 
+module "s3-assets-storage" {
+  source = "../modules/s3-public-storage"
+  common = local.common
+}
 
 # Cognito for authentication
 module "cognito-user-pool" {

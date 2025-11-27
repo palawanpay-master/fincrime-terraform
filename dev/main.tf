@@ -111,3 +111,24 @@ module "external-ssm-parameters" {
   }
 }
 
+
+# Fetch the ACM certificate by domain name (you can filter for issued ones only)
+data "aws_acm_certificate" "web_app_cert" {
+  domain   = var.domain
+  statuses = ["ISSUED"]
+  most_recent = true
+}
+
+module "web_app_alb" {
+  source           = "../modules/alb"
+  common           = local.common
+  vpc_id           = var.vpc_id
+  alb_name         = "web-app-alb"
+  certificate_arn  = data.aws_acm_certificate.web_app_cert.arn
+  internal         = true
+  http_redirect    = true
+  private_subnets  = var.private_subnet_ids
+}
+
+
+

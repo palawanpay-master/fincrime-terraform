@@ -3,3 +3,6 @@
 terraform.tfstate
 terraform.tfstate.*
 terraform.tfvars
+
+.DS_Store
+*.log

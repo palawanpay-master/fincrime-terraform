@@ -27,13 +27,13 @@ variable "cognito_domain_prefix" {
 variable "cognito_callback_urls" {
   description = "Allowed redirect URIs after login"
   type        = list(string)
-  default     = ["https://app.example.com/callback", "http://localhost:3000/dashboard", "https://fin-test.ecvphdevs.com/dashboard"]
+  default     = ["https://app.example.com/callback", "http://localhost:3000/dashboard"]
 }
 
 variable "cognito_logout_urls" {
   description = "Allowed redirect URIs after logout"
   type        = list(string)
-  default     = ["https://app.example.com/", "http://localhost:3000/auth/login", "https://fin-test.ecvphdevs.com/auth/login"]
+  default     = ["https://app.example.com/", "http://localhost:3000/auth/login"]
 }
 
 variable "microsoft_saml_metadata_url" {
@@ -96,8 +96,10 @@ variable "private_subnets" {
   description = "Private subnets for internal ALB (default if none provided)"
   type        = list(string)
   default = [
-    "subnet-0a1af408bd0f3af1b",
-    "subnet-0cccc0d6392a611a6",
-    "subnet-080c47e85077af051"
+    "subnet-045704e11f4173ff1",
+    "subnet-063786174d28cfc03",
+    "subnet-0e58b9efabf235586"
   ]
 }
+
+
